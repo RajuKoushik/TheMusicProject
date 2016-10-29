@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
+from django.shortcuts import render
+
 from .models import Album
 
 def index(request):
@@ -19,4 +21,7 @@ def index(request):
     return HttpResponse(template.render(context,request))
 
 def details(request, album_id):
-    return HttpResponse("<h1>You are at the album "+ str(album_id)+ " .</h1>")
+    template = loader.get_template('TheMusicApp/details.html')
+    album = Album.objects.get(pk = album_id)
+    context = {'album': album}
+    return HttpResponse(template.render(context,request))
