@@ -5,10 +5,36 @@
 
 <ul>
 
+
+
 {% for song in album.song_set.all %}
     <li>{{ song.song_title }} - {{ song.file_type }}</li>
 
 {% endfor %}
+
+<form action="/music/{{ album.id }}"  action="post">
+    {% csrf_token %}
+    {% for song in album.song_set.all %}
+
+    <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}">
+    <label for="song{{ forloop.counter }}">
+    {{ song.song_title }}
+
+    {% if song.is_favourite %}
+
+        <img src="http://i.imgur.com/brb13Rd.png">
+    {% endif %}
+
+
+    </label>
+    <li>{{ song.song_title }} - {{ song.file_type }}</li>
+
+{% endfor %}
+
+
+
+
+</form>
 
 
 

@@ -25,3 +25,7 @@ def details(request, album_id):
     album = Album.objects.get(pk = album_id)
     context = {'album': album}
     return HttpResponse(template.render(context,request))
+
+
+def favourites(request,album_id):
+    return HttpResponse('Favorites bro')
